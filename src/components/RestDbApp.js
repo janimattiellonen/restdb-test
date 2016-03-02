@@ -15,4 +15,9 @@ export default class RestDbApp extends React.Component {
             </div>
         );
     }
+
+    componentWillMount() {
+        console.log("daa");
+        this.props.discActions.getDiscs();
+    }    
 }

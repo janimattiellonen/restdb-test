@@ -4,18 +4,39 @@ import config from '../config.server';
 import webpackConfig from '../webpack.config';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-
-import Immutable from 'immutable';
 import fs from 'fs';
 import express from 'express';
+import axios from 'axios';
 
 dotenv.load();
 
 const ENV = process.env.NODE_ENV;
 
+function getAuthorizationHeaders() {
+    return {
+        headers: {
+            'x-apikey': 'a7ec4d09f812ba44808ac34add9f28d9038d7'
+        }
+    };
+};
+
+var headers = getAuthorizationHeaders();
+
 createServer(config, webpackConfig, (app) => {
     app.use(bodyParser({limit: '50mb'}));
     app.use(express.static('web'));
+
+    app.get('/api/discs', function (req, res) {
+        axios.get('https://testdb-8e20.restdb.io/rest/discs', headers).then(function (response) {
+            res.charSet = 'utf8';
+            let arr = [
+                {material: "lus"},
+                {material: "baz"}
+            ];
+
+            res.status(200).json(response);
+        });
+    });
 
     function handleError(err, res) {
         if(err) {
