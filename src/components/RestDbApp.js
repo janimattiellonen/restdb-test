@@ -1,0 +1,18 @@
+import React from 'react';
+import Router, {RouteHandler} from 'react-router';
+import { connect } from 'react-redux';
+
+export default class RestDbApp extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div id="page-inner">
+                {this.props.children}
+            </div>
+        );
+    }
+}
