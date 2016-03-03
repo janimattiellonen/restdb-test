@@ -8,7 +8,7 @@ export default class Home extends Component {
 		return (
 			<div className="container">
 				
-				<div>
+				<div className="">
 					<h1>My discs</h1>
 
 					<p>{discs.count()}</p>
