@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 export default connect(
     function mapStateToProps(state) {
         return {
-
+			discs: state.discs.discs
         }
     },
     function mapDispatchToProps(dispatch) {

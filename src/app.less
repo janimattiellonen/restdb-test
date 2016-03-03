@@ -1,3 +1,74 @@
 body {
 	background: gray;
 }
+
+
+.discs {
+	float:left;
+	margin: 80px;
+	width: 830px;
+	border: solid red 1px;
+
+	.disc {
+		width: 48%;
+		float: left;
+		margin: 1%;
+
+		img {
+			width: 400px;
+			height: 400px;
+		}
+
+		.disc-info {
+			h2 {
+				margin-bottom: 0;
+			}
+
+			h2, p.manufacturer {
+				margin-top: 0;
+			}
+
+			p.weight {
+				float: right;
+				font-size: 1.5em;
+				font-weight: bold;
+				text-align: right;
+			}
+
+			.type {
+				float: right;
+				font-size: 0.7em;
+				font-weight: normal;
+			}
+
+			.specs {
+				float: left;
+				width: 80%;
+				clear: both;
+
+				.attribute {
+
+					width: 50%;
+					height: 50%;
+
+					&.speed {
+						background: #46af5c;
+					}
+
+					&.glide {
+						background: #cd9327;
+
+					}
+
+					&.stability {
+						background: #24a2dc;
+					}
+
+					&.fade {
+						background: #e6de47;
+					}
+				}
+			}
+		}
+	}
+}
