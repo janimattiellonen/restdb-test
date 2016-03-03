@@ -7,8 +7,12 @@ export default class Home extends Component {
 
 		return (
 			<div className="container">
-				<h1>Home</h1>
+				
+				<div>
+					<h1>My discs</h1>
 
+					<p>{discs.count()}</p>
+				</div>
 				<div className="discs">
 					{discs.map(disc => {
 						return (
@@ -28,21 +32,21 @@ export default class Home extends Component {
 									<div className="specs">
 										<div className="attribute speed">
 											<h3>Speed</h3>
-											<p>{disc.speed}</p>
+											<p>{disc.speed ? disc.speed : 'n/a'}</p>
 										</div>
 										<div className="attribute glide">
 											<h3>Glide</h3>
-											<p>{disc.glide}</p>
+											<p>{disc.glide ? disc.glide : 'n/a'}</p>
 										</div>
 
 										<div className="attribute stability">
 											<h3>Stability</h3>
-											<p>{disc.stability}</p>
+											<p>{disc.stability ? disc.stability : 'n/a'}</p>
 										</div>
 
 										<div className="attribute fade2">
 											<h3>Fade</h3>
-											<p>{disc.fade}</p>
+											<p>{disc.fade ? disc.fade : 'n/a'}</p>
 										</div>
 									</div>	
 								</div>

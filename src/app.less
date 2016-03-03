@@ -11,14 +11,37 @@ body {
 		margin-bottom: -50px;
 		padding: 0;
 		position: relative;
+		background: pink;
+		#page {
+			background: gray;
+
+		}
+
+		#page-inner {
+			background: #f1f1f1;
+
+			.container {
+				margin: 0;
+				padding: 0;
+			}
+		}
 	}
 }
 
 
+#page-inner > .container div:first-child {
+	margin-bottom: 2%;
+}
+
 .discs {
 	width: 100%;
+	float: left;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+
 	.disc {
-		width: 48%;
+		width: 30%;
 		float: left;
 		margin: 1% 1% 5% 1%;
 
