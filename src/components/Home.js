@@ -20,25 +20,29 @@ export default class Home extends Component {
 										{disc.weight}g<br/>
 										<span className="type">{disc.type}</span>
 									</p>
-									<h2>{disc.material}</h2>
+
+									<h2>{disc.name}</h2>
+
 									<p className="manufacturer">{disc.manufacturer}</p>
-
-
 
 									<div className="specs">
 										<div className="attribute speed">
 											<h3>Speed</h3>
+											<p>{disc.speed}</p>
 										</div>
 										<div className="attribute glide">
 											<h3>Glide</h3>
+											<p>{disc.glide}</p>
 										</div>
 
 										<div className="attribute stability">
 											<h3>Stability</h3>
+											<p>{disc.stability}</p>
 										</div>
 
-										<div className="attribute fade">
+										<div className="attribute fade2">
 											<h3>Fade</h3>
+											<p>{disc.fade}</p>
 										</div>
 									</div>	
 								</div>

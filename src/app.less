@@ -1,22 +1,30 @@
 body {
 	background: gray;
+
+	#app {
+		background: #f6f6f6;
+		opacity: 1;
+		width: 90%;
+		max-width: 1200px;
+		min-height: 100%;
+		height: auto !important;
+		margin: 0 auto;
+		margin-bottom: -50px;
+		padding: 0;
+		position: relative;
+	}
 }
 
 
 .discs {
-	float:left;
-	margin: 80px;
-	width: 830px;
-	border: solid red 1px;
-
+	width: 100%;
 	.disc {
 		width: 48%;
 		float: left;
-		margin: 1%;
+		margin: 1% 1% 5% 1%;
 
 		img {
-			width: 400px;
-			height: 400px;
+			width: 100%;
 		}
 
 		.disc-info {
@@ -43,13 +51,22 @@ body {
 
 			.specs {
 				float: left;
-				width: 80%;
-				clear: both;
+				width: 100%;
 
 				.attribute {
-
+					float: left;
 					width: 50%;
-					height: 50%;
+					height: 35%;
+
+					h3, p {
+						font-size: 1em;
+						padding: 10px;
+						text-align: center;
+					}
+
+					p {
+						font-size: 2em;
+					}
 
 					&.speed {
 						background: #46af5c;
@@ -64,11 +81,23 @@ body {
 						background: #24a2dc;
 					}
 
-					&.fade {
+					&.fade2 {
 						background: #e6de47;
 					}
 				}
 			}
+		}
+	}
+}
+
+@media screen and (max-width: 854px) {
+
+	.discs {
+		width: 100%;
+		clear: both;
+
+		.disc {
+			width: 100%;
 		}
 	}
 }
