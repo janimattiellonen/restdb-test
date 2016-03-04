@@ -5,34 +5,16 @@ import { connect } from 'react-redux';
 import Home from '../Home';
 import { List } from 'immutable';
 
-export default class HomeContainer extends Component {
 
-    render() {
-        const {discs} = this.props;
-
-        return (
-            <Home discs={discs}/>
-        )
-    }
-}
-
-HomeContainer.defaultProps = {
-    discs: List()
-};
-
-function mapStateToProps(state) {
-    return {
-        discs: state.discs.discs
-    };
-}
-
-function mapDispatchToProps(dispatch) {
+export default connect(
+    function(state) {
+        return {
+            discs: state.discs.discs
+        };
+    },
+    function mapDispatchToProps(dispatch) {
         return { 
             discActions: bindActionCreators(DiscActions, dispatch)
         };
     }
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(HomeContainer);
+)(Home);

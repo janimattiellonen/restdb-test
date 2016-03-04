@@ -29,6 +29,7 @@ export function createRouter({ store, history }) {
         <Router history={history}>
             <Route component={RestDbAppContainer} path="/">
                 <IndexRoute component={HomeContainer} />
+                <Route path="discs(/:type)" component={HomeContainer} />
             </Route>
         </Router>
     );

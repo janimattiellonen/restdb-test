@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
-
 import Stats from './Stats';
 
 export default class Home extends Component {
 
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
-		const {discs} = this.props;
+		const { type } = this.props.params;
+
+		let discs = this.filter(this.props.discs, type);
 
 		return (
 			<div className="container">
 				<h1>My discs</h1>
 
-				<Stats discs={discs} />
+				<Stats discs={this.props.discs} />
 
 				<div className="discs">
-					{discs.map(disc => {
+					{discs.map( (disc, i) => {
 						return (
-							<div className="disc">
+							<div key={i} className="disc">
 								{this.renderImage(disc.image)}
 
 								<div className="disc-info">
@@ -57,6 +62,15 @@ export default class Home extends Component {
 			</div>
 		);
 	}	
+
+	filter(discs, type) {
+		if (!type) {
+			return discs;
+		}
+		console.log("type: " + type);
+		
+		return discs.filter(disc => disc.type == type);
+	}
 
 	renderImage(imageUrl) {
 		return imageUrl 
