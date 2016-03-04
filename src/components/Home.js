@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Stats from './Stats';
+
 export default class Home extends Component {
 
 	render() {
@@ -7,12 +9,10 @@ export default class Home extends Component {
 
 		return (
 			<div className="container">
-				
-				<div className="">
-					<h1>My discs</h1>
+				<h1>My discs</h1>
 
-					<p>{discs.count()}</p>
-				</div>
+				<Stats discs={discs} />
+
 				<div className="discs">
 					{discs.map(disc => {
 						return (
@@ -32,21 +32,21 @@ export default class Home extends Component {
 									<div className="specs">
 										<div className="attribute speed">
 											<h3>Speed</h3>
-											<p>{disc.speed ? disc.speed : 'n/a'}</p>
+											<p>{this.renderAttribute(disc.speed)}</p>
 										</div>
 										<div className="attribute glide">
 											<h3>Glide</h3>
-											<p>{disc.glide ? disc.glide : 'n/a'}</p>
+											<p>{this.renderAttribute(disc.glide)}</p>
 										</div>
 
 										<div className="attribute stability">
 											<h3>Stability</h3>
-											<p>{disc.stability ? disc.stability : 'n/a'}</p>
+											<p>{this.renderAttribute(disc.stability)}</p>
 										</div>
 
 										<div className="attribute fade2">
 											<h3>Fade</h3>
-											<p>{disc.fade ? disc.fade : 'n/a'}</p>
+											<p>{this.renderAttribute(disc.fade)}</p>
 										</div>
 									</div>	
 								</div>
@@ -57,4 +57,8 @@ export default class Home extends Component {
 			</div>
 		);
 	}	
+
+	renderAttribute(attribute) {
+		return attribute.length !== 0 ? attribute : 'n/a';
+	}
 };

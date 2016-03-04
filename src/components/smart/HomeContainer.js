@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from 'react';
+import React,  {Component, PropTypes } from 'react';
 import * as DiscActions from '../../actions/DiscActions';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Home from '../Home';
-import { List, Map} from 'immutable';
+import { List } from 'immutable';
 
 export default class HomeContainer extends Component {
 
@@ -17,7 +17,7 @@ export default class HomeContainer extends Component {
 }
 
 HomeContainer.defaultProps = {
-    discc: List()
+    discs: List()
 };
 
 function mapStateToProps(state) {
