@@ -1,9 +1,12 @@
 var port = 8766;
 
 module.exports = {
-    'server': {
+    server: {
         'port': port,
         'url': 'http://localhost:' + port
     },
-    port: port
+    port: port,
+    restdb: {
+    	api_key: ''
+    }
 };

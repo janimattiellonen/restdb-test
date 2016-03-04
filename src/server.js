@@ -15,7 +15,7 @@ const ENV = process.env.NODE_ENV;
 function getAuthorizationHeaders() {
     return {
         headers: {
-            'x-apikey': 'a7ec4d09f812ba44808ac34add9f28d9038d7'
+            'x-apikey': config.restdb.key
         }
     };
 };
