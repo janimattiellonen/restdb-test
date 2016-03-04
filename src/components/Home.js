@@ -17,7 +17,7 @@ export default class Home extends Component {
 					{discs.map(disc => {
 						return (
 							<div className="disc">
-								<img src="/images/lamankiekko.jpg" />
+								{this.renderImage(disc.image)}
 
 								<div className="disc-info">
 									<p className="weight">
@@ -58,6 +58,11 @@ export default class Home extends Component {
 		);
 	}	
 
+	renderImage(imageUrl) {
+		return imageUrl 
+		? <img src={'https://testdb-8e20.restdb.io/media/' + imageUrl + '?s=o'} />
+		: <img src="/images/unknown.png" />
+	}
 	renderAttribute(attribute) {
 		return attribute.length !== 0 ? attribute : 'n/a';
 	}
