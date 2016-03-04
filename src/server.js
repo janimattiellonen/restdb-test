@@ -3,19 +3,16 @@ import { createServer } from './util/server';
 import config from '../config.server';
 import webpackConfig from '../webpack.config';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
 import fs from 'fs';
 import express from 'express';
 import axios from 'axios';
-
-dotenv.load();
 
 const ENV = process.env.NODE_ENV;
 
 function getAuthorizationHeaders() {
     return {
         headers: {
-            'x-apikey': config.restdb.key
+            'x-apikey': config.restdb.api_key
         }
     };
 };

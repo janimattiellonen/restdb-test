@@ -90,7 +90,6 @@
         "brfs": "0.0.8",
         "classnames": "^2.2.1",
         "compression": "^1.6.1",
-        "dotenv": "^1.2.0",
         "ejsify": "0.1.0",
         "express": "^4.13.4",
         "fs": "^0.0.2",
