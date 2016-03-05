@@ -13,21 +13,17 @@ export default class Stats extends Component {
 		const { discs } = this.props;
 
 		return (
-			<div className="disc-stats">
-				<div className="row">
-					Discs: {discs.count()} <br/>
+			<div className="disc-search">
+				<p>Discs: {discs.count()}</p>
 
-					<p>Disc types:</p>
-
-					<ul>
-						<li key="all-discs"><Link to="/discs">All</Link></li> 
-						{this.getDiscTypes().map((disc, i) => {
-							return (
-								<li key={i}><Link to={'/discs/' + disc.type}>{disc.type} ({this.getDiscTypeCount(disc.type)})</Link></li>
-							)
-						})}
-					</ul>
-				</div>
+				<ul>
+					<li key="all-discs"><Link to="/discs">All</Link></li> 
+					{this.getDiscTypes().map((disc, i) => {
+						return (
+							<li key={i}><Link to={'/discs/' + disc.type}>{disc.type} ({this.getDiscTypeCount(disc.type)})</Link></li>
+						)
+					})}
+				</ul>
 			</div>
 		)
 	}

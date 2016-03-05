@@ -26,7 +26,7 @@ export default class Home extends Component {
 
 								<div className="disc-info">
 									<p className="weight">
-										{disc.weight}g<br/>
+										{this.renderWeight(disc.weight)}<br/>
 										<span className="type">{disc.type}</span>
 									</p>
 
@@ -70,6 +70,10 @@ export default class Home extends Component {
 		console.log("type: " + type);
 		
 		return discs.filter(disc => disc.type == type);
+	}
+
+	renderWeight(weight) {
+		return weight > 0 ? weight + "g" : 'n/a';
 	}
 
 	renderImage(imageUrl) {
