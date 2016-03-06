@@ -188,7 +188,6 @@ const envs = {
             new HtmlWebpackPlugin({
                 title: 'Pekkis Goes To Movies',
                 template: 'web/index.html',
-                favicon: 'web/favicon.ico',
                 inject: 'body',
             }),
             new webpack.optimize.UglifyJsPlugin({
