@@ -58,12 +58,29 @@ body {
 		}
 
 		.disc-info {
+
+			.col {
+				&.left {
+					float: left;
+									width: 70%;
+				}
+
+				&.right {
+					float: right;
+					text-align: right;
+				}
+			}
+
 			h2 {
 				margin-bottom: 0;
 			}
 
 			h2, p.manufacturer {
 				margin-top: 0;
+			}
+
+			p.manufacturer, p.material {
+				margin-bottom: 0;
 			}
 
 			p.weight {
@@ -74,8 +91,6 @@ body {
 			}
 
 			.type {
-				float: right;
-				font-size: 0.7em;
 				font-weight: normal;
 			}
 
@@ -132,6 +147,16 @@ body {
 
 		.disc {
 			width: 100%;
+		}
+	}
+}
+
+
+
+@media screen and (min-width: 855px) and (max-width: 991px) {
+	.disc {
+		h2 {
+			font-size: 1.3em;
 		}
 	}
 }

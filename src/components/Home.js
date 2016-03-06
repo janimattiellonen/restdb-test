@@ -25,15 +25,13 @@ export default class Home extends Component {
 								{this.renderImage(disc.image)}
 
 								<div className="disc-info">
-									<p className="weight">
-										{this.renderWeight(disc.weight)}<br/>
-										<span className="type">{disc.type}</span>
-									</p>
+									<h2>{disc.name}&nbsp;</h2>
 
-									<h2>{disc.name}</h2>
+									<p className="manufacturer">{disc.manufacturer} {disc.material}&nbsp;</p>
 
-									<p className="manufacturer">{disc.manufacturer}</p>
 
+									<p className="type">{disc.type}{this.renderWeight(disc.weight)}</p>
+									
 									<div className="specs">
 										<div className="attribute speed">
 											<h3>Speed</h3>
@@ -73,7 +71,7 @@ export default class Home extends Component {
 	}
 
 	renderWeight(weight) {
-		return weight > 0 ? weight + "g" : 'n/a';
+		return weight > 0 ? ', ' + weight + 'g' : '';
 	}
 
 	renderImage(imageUrl) {
@@ -81,6 +79,7 @@ export default class Home extends Component {
 		? <img src={'https://testdb-8e20.restdb.io/media/' + imageUrl + '?s=o'} />
 		: <img src="/images/unknown.png" />
 	}
+
 	renderAttribute(attribute) {
 		return attribute.length !== 0 ? attribute : 'n/a';
 	}
