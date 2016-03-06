@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Stats from './Stats';
 
 export default class Home extends Component {
