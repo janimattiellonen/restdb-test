@@ -49,17 +49,6 @@ const common = {
 
     module: {
         loaders: [
-            {   
-                test: /node_modules\/auth0-lock\/.*\.js$/,
-                loaders: [
-                    'transform-loader/cacheable?brfs',
-                    'transform-loader/cacheable?packageify'
-                ]
-            },
-            {
-                test: /node_modules\/auth0-lock\/.*\.ejs$/,
-                loader: 'transform-loader/cacheable?ejsify'
-            }, 
             {
               test: /\.json$/,
               loader: 'json-loader'
@@ -95,7 +84,8 @@ const common = {
                 test: webpack_isomorphic_tools_plugin.regular_expression('images'),
                 loaders: [
                     'file?hash=sha512&digest=hex&name=assets/images/[hash:base58:8].[ext]',
-                    'img?minimize&optimizationLevel=5&progressive=true'
+                    'img?minimize&optimizationLevel=5&progressive=true',
+                    'file'
                 ],
                 include: [
                     PATHS.src,
@@ -186,7 +176,7 @@ const envs = {
             new webpack.optimize.OccurenceOrderPlugin(),
             new ExtractTextPlugin("styles.[contenthash].css"),
             new HtmlWebpackPlugin({
-                title: 'Pekkis Goes To Movies',
+                title: 'My discs',
                 template: 'web/index.html',
                 inject: 'body',
             }),
