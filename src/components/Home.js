@@ -30,12 +30,10 @@ export default class Home extends Component {
 									{this.renderLostDisc(disc)}
 								</div>
 								
-
 								<div className="disc-info">
 									<h2>{disc.name}&nbsp;</h2>
 
 									<p className="manufacturer">{disc.manufacturer} {disc.material}&nbsp;</p>
-
 
 									<p className="type">{disc.type}{this.renderWeight(disc.weight)}</p>
 									
@@ -72,7 +70,10 @@ export default class Home extends Component {
 		if (!type) {
 			return discs;
 		}
-		console.log("type: " + type);
+
+		if (type == 'lost') {
+			return discs.filter(disc => disc.missing == true);
+		}
 		
 		return discs.filter(disc => disc.type == type);
 	}
@@ -90,7 +91,6 @@ export default class Home extends Component {
 	}
 
 	renderImage(disc) {
-
 		if (_.isUndefined(disc.image) || disc.image == "") {
 			return (
 				<img src="/images/unknown.png" />

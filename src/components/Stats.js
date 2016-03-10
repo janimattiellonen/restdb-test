@@ -17,7 +17,8 @@ export default class Stats extends Component {
 				<p>Discs: {discs.count()}</p>
 
 				<ul>
-					<li key="all-discs"><Link to="/discs">All</Link></li> 
+					<li key="all-discs"><Link to="/discs">All ({discs.count()})</Link></li>
+					<li key="lost-discs"><Link to="/discs/lost">Lost ({this.getLostDiscCount()})</Link></li> 
 					{this.getDiscTypes().map((disc, i) => {
 						return (
 							<li key={i}><Link to={'/discs/' + disc.type}>{disc.type} ({this.getDiscTypeCount(disc.type)})</Link></li>
@@ -32,6 +33,12 @@ export default class Stats extends Component {
 		const { discs } = this.props;
 
 		return List(_.uniqBy(discs.toArray(), 'type')).sortBy(disc => disc.type);
+	}
+
+	getLostDiscCount() {
+		const { discs } = this.props;
+
+		return discs.filter(disc => disc.missing == true).count();
 	}
 
 	getDiscTypeCount(type) {
