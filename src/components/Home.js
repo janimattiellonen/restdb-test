@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 import Stats from './Stats';
 
@@ -23,7 +24,12 @@ export default class Home extends Component {
 					{discs.map( (disc, i) => {
 						return (
 							<div key={i} className="disc">
-								{this.renderImage(disc.image)}
+								<div className="image-div">
+									{this.renderImage(disc)}
+
+									{this.renderLostDisc(disc)}
+								</div>
+								
 
 								<div className="disc-info">
 									<h2>{disc.name}&nbsp;</h2>
@@ -71,14 +77,28 @@ export default class Home extends Component {
 		return discs.filter(disc => disc.type == type);
 	}
 
+	renderLostDisc(disc) {
+		if (disc.missing) {
+			return (
+				<div className="lost-disc"><span>Lost disc</span></div>
+			)
+		}
+	}
+
 	renderWeight(weight) {
 		return weight > 0 ? ', ' + weight + 'g' : '';
 	}
 
-	renderImage(imageUrl) {
-		return imageUrl 
-		? <img src={'https://testdb-8e20.restdb.io/media/' + imageUrl + '?s=o'} />
-		: <img src="/images/unknown.png" />
+	renderImage(disc) {
+
+		if (_.isUndefined(disc.image) || disc.image == "") {
+			return (
+				<img src="/images/unknown.png" />
+			)
+		} 
+		return (
+			<img src={'https://testdb-8e20.restdb.io/media/' + disc.image + '?s=o'} />
+		)
 	}
 
 	renderAttribute(attribute) {

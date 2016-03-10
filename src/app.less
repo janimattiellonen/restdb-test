@@ -36,7 +36,6 @@ body {
 	}
 }
 
-
 .discs {
 	width: 100%;
 	float: left;
@@ -51,8 +50,31 @@ body {
 		margin-bottom: 25px;
 		padding: 5px;
 
-		img {
-			width: 100%;
+		.image-div {
+			float: left;
+			position: relative;
+			img {
+				width: 100%;
+			}
+
+			.lost-disc {
+				position: absolute;
+				background: red;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				transition: opacity .5s;
+				opacity: .5;
+				
+				span {
+					display: block;
+					-moz-transform: rotate(-45deg);
+					text-align: center;
+					margin-top: 40%;
+					font-size: 4em;
+				}
+			}
 		}
 
 		.disc-info {
