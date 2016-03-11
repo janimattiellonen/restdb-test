@@ -16,6 +16,14 @@ export default class Stats extends Component {
 			<div className="disc-search">
 				<p>Discs: {discs.count()}</p>
 
+				<h2>View mode:</h2>
+
+				<ul>
+					<li>Normal</li>
+					<li>Table</li>
+				</ul>
+
+				<h2>Filter:</h2>
 				<ul>
 					<li key="all-discs"><Link to="/discs">All ({discs.count()})</Link></li>
 					<li key="lost-discs"><Link to="/discs/lost">Lost ({this.getLostDiscCount()})</Link></li> 
