@@ -17,6 +17,7 @@ export default class TableView extends Component {
 				<table className="discs-table">
 					<thead>
 						<tr>
+							<th>#</th>
 							<th className="col-name">Name</th>
 							<th className="col-type">Type</th>
 							<th>Manufacturer</th>
@@ -50,6 +51,7 @@ export default class TableView extends Component {
 	renderRow(disc, i) {
 		return (
 			<tr key={i}  className={classNames({'lost': disc.missing})}>
+				<td>{i + 1}</td>
 				<td>{disc.name}</td>
 				<td>{disc.type}</td>
 				<td>{disc.manufacturer}</td>

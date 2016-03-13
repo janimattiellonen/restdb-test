@@ -10,7 +10,7 @@ export default class Stats extends Component {
 	}
 
 	render() {
-		const { discs } = this.props;
+		const { discs, mode, type } = this.props;
 
 		return (
 			<div className="disc-search">
@@ -19,17 +19,17 @@ export default class Stats extends Component {
 				<h2>View mode:</h2>
 
 				<ul>
-					<li>Normal</li>
-					<li>Table</li>
+					<li><Link to={'/discs/' + type + '?mode=normal'}>Normal</Link></li>
+					<li><Link to={'/discs/' + type + '?mode=table'}>Table</Link></li>
 				</ul>
 
 				<h2>Filter:</h2>
 				<ul>
-					<li key="all-discs"><Link to="/discs">All ({discs.count()})</Link></li>
-					<li key="lost-discs"><Link to="/discs/lost">Lost ({this.getLostDiscCount()})</Link></li> 
+					<li key="all-discs"><Link to={"/discs/all?mode=" + mode}>All ({discs.count()})</Link></li>
+					<li key="lost-discs"><Link to={"/discs/lost?mode=" + mode}>Lost ({this.getLostDiscCount()})</Link></li> 
 					{this.getDiscTypes().map((disc, i) => {
 						return (
-							<li key={i}><Link to={'/discs/' + disc.type}>{disc.type} ({this.getDiscTypeCount(disc.type)})</Link></li>
+							<li key={i}><Link to={'/discs/' + disc.type + '?mode=' + mode}>{disc.type} ({this.getDiscTypeCount(disc.type)})</Link></li>
 						)
 					})}
 				</ul>

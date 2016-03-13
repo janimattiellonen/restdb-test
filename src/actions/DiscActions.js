@@ -8,13 +8,11 @@ export function loadDiscs(discs) {
 }
 
 export function getDiscs() {
-	console.log("getDiscs");
 	return function(dispatch, getState) {
 		api.getDiscs().then(discs => {
-			console.log("FOO");
 			return dispatch(loadDiscs(discs));
 		}).catch((response) => {
-			console.log(JSON.stringify(response));
+
 		});
 	};
 }

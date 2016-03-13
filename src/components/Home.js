@@ -9,28 +9,52 @@ export default class Home extends Component {
 
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			mode: 'normal'
+		};
 	}
 
 	render() {
+		const { mode } = this.props.location.query;
 		const { type } = this.props.params;
 
 		let discs = this.filter(this.props.discs, type);
+		let renderMode = this.getMode(mode) == 'normal' ? this.renderNormalView.bind(this, discs) : this.renderTableView.bind(this, discs);
 
 		return (
 			<div className="container">
 				<h1>My discs</h1>
 
-				<Stats discs={this.props.discs} />
+				<Stats mode={this.getMode(mode)} discs={this.props.discs} type={this.getType(type)}/>
 
-				<TableView discs={discs} />
+				{renderMode()}
 
-				<NormalView discs={discs} />
 			</div>
 		);
 	}	
+	getType(type) {
+		return type ? type : 'all';
+	}
+
+	getMode(mode) {
+		return mode != 'normal' && mode != 'table' ? 'normal' : mode;
+	}
+
+	renderNormalView(discs) {
+		return (
+			<NormalView discs={discs} />
+		)
+	}
+
+	renderTableView(discs) {		
+		return (
+			<TableView discs={discs} />
+		)
+	}
 
 	filter(discs, type) {
-		if (!type) {
+		if (!type || type == 'all') {
 			return discs;
 		}
 

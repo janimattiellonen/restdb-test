@@ -4,7 +4,6 @@ import { routeReducer, syncReduxAndRouter } from 'redux-simple-router';
 
 
 export function createStore(reducers, history) {
-	console.log("history: " + (history == null));
 	const createStoreWithMiddleware = applyMiddleware(
 	  thunk
 	)(reduxCreateStore);
