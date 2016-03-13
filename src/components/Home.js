@@ -49,7 +49,7 @@ export default class Home extends Component {
 
 	renderTableView(discs) {		
 		return (
-			<TableView discs={discs} />
+			<TableView discs={discs} location={this.props.location} />
 		)
 	}
 

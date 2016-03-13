@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { List } from 'immutable';
 import _ from 'lodash';
 import Stats from './Stats';
 import classNames from 'classnames';
+import {Link} from 'react-router';
 
 export default class TableView extends Component {
 
@@ -10,7 +12,10 @@ export default class TableView extends Component {
 	}
 
 	render() {
-		const { discs } = this.props;
+		let direction = this.props.location.query.direction;
+		const discs = this.sort(this.props.discs, this.props.location.query.sortBy, direction);
+
+		direction = this.flipDirection(direction);
 
 		return (
 			<div>
@@ -19,15 +24,15 @@ export default class TableView extends Component {
 						<tr>
 							<th>#</th>
 							<th className="col-name">Name</th>
-							<th className="col-type">Type</th>
-							<th>Manufacturer</th>
-							<th>Material</th>
-							<th>Weight</th>
-							<th>Sp</th>
-							<th>Gl</th>
-							<th>St</th>
-							<th>Fa</th>
-							<th>Lost</th>
+							<th className="col-type"><Link to={this.getUrl('type', direction)}>Type</Link></th>
+							<th><Link to={this.getUrl('manufacturer', direction)}>Manufacturer</Link></th>
+							<th><Link to={this.getUrl('material', direction)}>Material</Link></th>
+							<th><Link to={this.getUrl('weight', direction)}>Weight</Link></th>
+							<th><Link to={this.getUrl('speed', direction)}>Sp</Link></th>
+							<th><Link to={this.getUrl('glide', direction)}>Gl</Link></th>
+							<th><Link to={this.getUrl('stability', direction)}>St</Link></th>
+							<th><Link to={this.getUrl('fade', direction)}>Fa</Link></th>
+							<th><Link to={this.getUrl('missing', direction)}>Lost</Link></th>
 							<th className="col-missing-description">Missing description</th>
 						</tr>
 					</thead>
@@ -42,10 +47,29 @@ export default class TableView extends Component {
 
 					</tfoot>
 
-
 				</table>
 			</div>
 		)
+	}
+
+	sort(discs, sortBy = null, direction = 'desc') {
+		if (!sortBy) {
+			return discs;
+		}
+
+		return List(_.orderBy(discs.toArray(), [sortBy], [direction]));
+	}
+
+	flipDirection(direction) {
+		if (null == direction || direction == 'asc') {
+			return 'desc';
+		} else {
+			return 'asc';
+		}
+	}
+
+	getUrl(sortBy, direction = 'desc') {
+		return this.props.location.pathname + '?mode=' + this.props.location.query.mode + '&sortBy=' + sortBy + '&direction=' + direction;
 	}
 
 	renderRow(disc, i) {
