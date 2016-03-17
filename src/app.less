@@ -19,6 +19,10 @@ body {
 	}
 }
 
+h2 {
+	font-size: 1.5em;
+}
+
 .disc-search {
 	width: 100%;
 	padding: 5px;
@@ -31,7 +35,19 @@ body {
 		li {
 			display: inline-block;
 			margin: 0 10px 0 0;
+		}
+	}
 
+	.free-search {
+		float: left;
+		width: 100%;
+		margin: 5px 0 5px;
+
+		input {
+			position: relative;
+			width: 100%;
+			font-size: 1.5em;
+			padding: 5px;
 		}
 	}
 }
@@ -167,6 +183,7 @@ body {
 }
 
 .discs-table {
+	width: 100%;
 
 	tr:nth-child(even) {background: #CCC}
 	tr:nth-child(odd) {background: #FFF}
@@ -196,9 +213,7 @@ body {
 
 @media screen and (max-width: 850px) {
 	.disc-search {
-		ul li {
-			display: block;
-		}
+
 	}
 }
 

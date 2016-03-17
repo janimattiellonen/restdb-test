@@ -15,8 +15,6 @@ export default class TableView extends Component {
 		let direction = this.props.location.query.direction;
 		const discs = this.sort(this.props.discs, this.props.location.query.sortBy, direction);
 
-		direction = this.flipDirection(direction);
-
 		return (
 			<div>
 				<table className="discs-table">
@@ -69,6 +67,12 @@ export default class TableView extends Component {
 	}
 
 	getUrl(sortBy, direction = 'desc') {
+		if (this.props.location.query.direction && this.props.location.query.sortBy) {
+			if (this.props.location.query.sortBy == sortBy) {
+				direction = this.flipDirection(direction);
+			}
+		}
+		
 		return this.props.location.pathname + '?mode=' + this.props.location.query.mode + '&sortBy=' + sortBy + '&direction=' + direction;
 	}
 

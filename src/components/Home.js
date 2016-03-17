@@ -4,6 +4,9 @@ import _ from 'lodash';
 import Stats from './Stats';
 import NormalView from './NormalView';
 import TableView from './TableView';
+import { List } from 'immutable';
+import SmartSearch from 'smart-search';
+
 
 export default class Home extends Component {
 
@@ -11,7 +14,8 @@ export default class Home extends Component {
 		super(props);
 
 		this.state = {
-			mode: 'normal'
+			mode: 'normal',
+			discs: List()
 		};
 	}
 
@@ -19,14 +23,14 @@ export default class Home extends Component {
 		const { mode } = this.props.location.query;
 		const { type } = this.props.params;
 
-		let discs = this.filter(this.props.discs, type);
-		let renderMode = this.getMode(mode) == 'normal' ? this.renderNormalView.bind(this, discs) : this.renderTableView.bind(this, discs);
+		let discs = this.filter(this.state.discs, type);
+		let renderMode = this.getMode(mode) == 'normal' ? this.renderNormalView.bind(this) : this.renderTableView.bind(this);
 
 		return (
 			<div className="container">
 				<h1>My discs</h1>
 
-				<Stats mode={this.getMode(mode)} discs={this.props.discs} type={this.getType(type)}/>
+				<Stats onFreeSearch={::this.freeSearch} mode={this.getMode(mode)} discs={this.props.discs} type={this.getType(type)}/>
 
 				{renderMode()}
 
@@ -41,19 +45,29 @@ export default class Home extends Component {
 		return mode != 'normal' && mode != 'table' ? 'normal' : mode;
 	}
 
-	renderNormalView(discs) {
+	renderNormalView() {
+		const { discs } = this.state;
+
 		return (
 			<NormalView discs={discs} />
 		)
 	}
 
-	renderTableView(discs) {		
+	renderTableView() {
+		const { discs } = this.state;		
 		return (
 			<TableView discs={discs} location={this.props.location} />
 		)
 	}
 
-	filter(discs, type) {
+	filter(discs, type, term) {
+		if (term) {
+			let patterns = [term];
+			let fields = ['name'];
+			let results = SmartSearch(discs, patterns, fields, {maxInsertions: 2});
+
+			return List(results).map(a => a.entry);
+		}
 		if (!type || type == 'all') {
 			return discs;
 		}
@@ -62,8 +76,34 @@ export default class Home extends Component {
 			return discs.filter(disc => disc.missing == true);
 		}
 		
+		if (type == 'available') {
+			return discs.filter(disc => disc.missing != true);
+		}
+		
 		return discs.filter(disc => disc.type == type);
 	}
 
+	freeSearch(term) {
+		if (term && term.length > 0) {
+			this.setState({
+				discs: this.filter(this.props.discs, null, term)
+			});
+		}
+	}
+
+
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.discs) {
+			const { mode } = nextProps.location.query;
+			const { type } = nextProps.params;
+
+			let discs = this.filter(nextProps.discs, type);
+
+			this.setState({
+				discs: discs
+			});
+		}
+	}
 
 };

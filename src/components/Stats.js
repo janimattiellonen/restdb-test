@@ -7,6 +7,10 @@ export default class Stats extends Component {
 
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			term: null
+		};
 	}
 
 	render() {
@@ -26,6 +30,7 @@ export default class Stats extends Component {
 				<h2>Filter:</h2>
 				<ul>
 					<li key="all-discs"><Link to={"/discs/all?mode=" + mode}>All ({discs.count()})</Link></li>
+					<li key="available-discs"><Link to={"/discs/available?mode=" + mode}>Available ({this.getAvailableDiscCount()})</Link></li>
 					<li key="lost-discs"><Link to={"/discs/lost?mode=" + mode}>Lost ({this.getLostDiscCount()})</Link></li> 
 					{this.getDiscTypes().map((disc, i) => {
 						return (
@@ -33,14 +38,36 @@ export default class Stats extends Component {
 						)
 					})}
 				</ul>
+
+				<div className="free-search" onChange={::this.handleChange}>
+					<input type="text" value={this.state.term} />
+				</div>
 			</div>
 		)
+	}
+
+	handleChange(e) {
+		let value = e.target.value;
+
+		console.log("term: " + value);
+
+		this.setState({
+			[e.target.name]: value
+		});
+
+		this.props.onFreeSearch(value);
 	}
 
 	getDiscTypes() {
 		const { discs } = this.props;
 
 		return List(_.uniqBy(discs.toArray(), 'type')).sortBy(disc => disc.type);
+	}
+
+	getAvailableDiscCount() {
+		const { discs } = this.props;
+
+		return discs.filter(disc => disc.missing != true).count();
 	}
 
 	getLostDiscCount() {
