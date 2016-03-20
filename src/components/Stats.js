@@ -25,6 +25,7 @@ export default class Stats extends Component {
 				<ul>
 					<li><Link to={'/discs/' + type + '?mode=normal'}>Normal</Link></li>
 					<li><Link to={'/discs/' + type + '?mode=table'}>Table</Link></li>
+					<li><Link to={'/discs/' + type + '?mode=swipe'}>Swipe</Link></li>
 				</ul>
 
 				<h2>Filter:</h2>
@@ -32,6 +33,7 @@ export default class Stats extends Component {
 					<li key="all-discs"><Link to={"/discs/all?mode=" + mode}>All ({discs.count()})</Link></li>
 					<li key="available-discs"><Link to={"/discs/available?mode=" + mode}>Available ({this.getAvailableDiscCount()})</Link></li>
 					<li key="lost-discs"><Link to={"/discs/lost?mode=" + mode}>Lost ({this.getLostDiscCount()})</Link></li> 
+					
 					{this.getDiscTypes().map((disc, i) => {
 						return (
 							<li key={i}><Link to={'/discs/' + disc.type + '?mode=' + mode}>{disc.type} ({this.getDiscTypeCount(disc.type)})</Link></li>
@@ -48,8 +50,6 @@ export default class Stats extends Component {
 
 	handleChange(e) {
 		let value = e.target.value;
-
-		console.log("term: " + value);
 
 		this.setState({
 			[e.target.name]: value

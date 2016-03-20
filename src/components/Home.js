@@ -4,6 +4,7 @@ import _ from 'lodash';
 import Stats from './Stats';
 import NormalView from './NormalView';
 import TableView from './TableView';
+import SwipeView from './SwipeView';
 import { List } from 'immutable';
 import SmartSearch from 'smart-search';
 
@@ -24,13 +25,29 @@ export default class Home extends Component {
 		const { type } = this.props.params;
 
 		let discs = this.filter(this.state.discs, type);
-		let renderMode = this.getMode(mode) == 'normal' ? this.renderNormalView.bind(this) : this.renderTableView.bind(this);
+		let renderMode = null;
+
+		switch (mode) {
+			case 'table':
+				console.log("here1");
+				renderMode = this.renderTableView.bind(this);
+				break;
+			case 'swipe':
+				console.log("here2");
+				renderMode = this.renderSwipeView.bind(this);
+				break;
+			case 'normal':
+			default:
+				console.log("here3");
+				renderMode = this.renderNormalView.bind(this);
+				break;
+		}
 
 		return (
 			<div className="container">
 				<h1>My discs</h1>
 
-				<Stats onFreeSearch={::this.freeSearch} mode={this.getMode(mode)} discs={this.props.discs} type={this.getType(type)}/>
+				<Stats onFreeSearch={::this.freeSearch} mode={mode} discs={this.props.discs} type={this.getType(type)}/>
 
 				{renderMode()}
 
@@ -39,10 +56,6 @@ export default class Home extends Component {
 	}	
 	getType(type) {
 		return type ? type : 'all';
-	}
-
-	getMode(mode) {
-		return mode != 'normal' && mode != 'table' ? 'normal' : mode;
 	}
 
 	renderNormalView() {
@@ -57,6 +70,14 @@ export default class Home extends Component {
 		const { discs } = this.state;		
 		return (
 			<TableView discs={discs} location={this.props.location} />
+		)
+	}
+
+	renderSwipeView() {
+		const { discs } = this.state;
+
+		return (
+			<SwipeView discs={discs} location={this.props.location} />
 		)
 	}
 

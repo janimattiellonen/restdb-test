@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { List } from 'immutable';
 import _ from 'lodash';
-import Stats from './Stats';
 import classNames from 'classnames';
 import {Link} from 'react-router';
 
