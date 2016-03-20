@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import Stats from './Stats';
 import classNames from 'classnames';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 export default class NormalView extends Component {
 
@@ -54,11 +55,28 @@ export default class NormalView extends Component {
 		)
 	}
 
+	renderTooltip(disc, element) {
+		if (!disc.missing_description || disc.missing_description.length == 0) {
+			return element;
+		}
+
+		const tooltip = (
+		  	<Tooltip id={"tooltip-disc-" + disc.id}>
+		  		<span>{disc.missing_description}</span>
+		  	</Tooltip>
+		);
+
+		return (
+			<OverlayTrigger placement="bottom" overlay={tooltip}>
+				{element}
+			</OverlayTrigger>
+		)
+	}
+
 	renderLostDisc(disc) {
 		if (disc.missing) {
-			return (
-				<div className="lost-disc"><span>Lost disc</span></div>
-			)
+			let element = (<div className="lost-disc"><span>Lost disc</span></div>);
+			return this.renderTooltip(disc, element);
 		}
 	}
 
@@ -67,14 +85,22 @@ export default class NormalView extends Component {
 	}
 
 	renderImage(disc) {
+		const tooltip = (
+		  	<Tooltip id={"tooltip-disc-" + disc.id}>
+		  		<span>{disc.missing_description}</span>
+		  	</Tooltip>
+		);
+
+		let element = null;
+
 		if (_.isUndefined(disc.image) || disc.image == "") {
-			return (
-				<img src="/images/unknown.png" />
-			)
-		} 
-		return (
-			<img src={'https://testdb-8e20.restdb.io/media/' + disc.image + '?s=o'} />
-		)
+			element = (<img src="/images/unknown.png" />);
+		} else {
+			let src = 'https://testdb-8e20.restdb.io/media/' + disc.image + '?s=o';
+			element = <img src={src} />;
+		}
+
+		return this.renderTooltip(disc, element);
 	}
 
 	renderAttribute(attribute) {
