@@ -15,7 +15,7 @@ require('bootstrap/dist/css/bootstrap.css');
 require('react-select/dist/default.css');
 require('./app.less');
 require('bootstrap/dist/js/bootstrap.js');
-require('jquery-ui/themes/base/jquery-ui.css');
+require('jquery-ui/themes/base/core.css');
 
 const store = createStore(reducers, history);
 
