@@ -18,15 +18,19 @@ export default class NormalView extends Component {
 								{this.renderImage(disc)}
 
 								{this.renderLostDisc(disc)}
+
+								{ this.renderSoldDisc(disc) }
 							</div>
-							
+
 							<div className="disc-info">
 								<h2>{disc.name}&nbsp;</h2>
 
 								<p className="manufacturer">{disc.manufacturer} {disc.material}&nbsp;</p>
 
 								<p className="type">{disc.type}{this.renderWeight(disc.weight)}</p>
-								
+
+
+
 								<div className="specs">
 									<div className="attribute speed">
 										<h3>Speed</h3>
@@ -46,7 +50,7 @@ export default class NormalView extends Component {
 										<h3>Fade</h3>
 										<p>{this.renderAttribute(disc.fade)}</p>
 									</div>
-								</div>	
+								</div>
 							</div>
 						</div>
 					)
@@ -76,6 +80,13 @@ export default class NormalView extends Component {
 	renderLostDisc(disc) {
 		if (disc.missing) {
 			let element = (<div className="lost-disc"><span>Lost disc</span></div>);
+			return this.renderTooltip(disc, element);
+		}
+	}
+
+	renderSoldDisc(disc) {
+		if (disc.sold) {
+			let element = (<div className="lost-disc"><span>Sold</span></div>);
 			return this.renderTooltip(disc, element);
 		}
 	}
