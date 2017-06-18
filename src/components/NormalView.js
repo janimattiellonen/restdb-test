@@ -25,11 +25,13 @@ export default class NormalView extends Component {
 							<div className="disc-info">
 								<h2>{disc.name}&nbsp;</h2>
 
+								{
+									disc.collection_item &&
+									<p className="collection-item">Collection item</p>
+								}
+
 								<p className="manufacturer">{disc.manufacturer} {disc.material}&nbsp;</p>
-
 								<p className="type">{disc.type}{this.renderWeight(disc.weight)}</p>
-
-
 
 								<div className="specs">
 									<div className="attribute speed">

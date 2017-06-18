@@ -31,7 +31,10 @@ export default class Stats extends Component {
 				<ul>
 					<li key="all-discs"><Link to={"/discs/all?mode=" + mode}>All ({discs.count()})</Link></li>
 					<li key="available-discs"><Link to={"/discs/available?mode=" + mode}>Available ({this.getAvailableDiscCount()})</Link></li>
-					<li key="lost-discs"><Link to={"/discs/lost?mode=" + mode}>Lost ({this.getLostDiscCount()})</Link></li> 
+					<li key="lost-discs"><Link to={"/discs/lost?mode=" + mode}>Lost ({this.getLostDiscCount()})</Link></li>
+					<li key="collection-item-discs"><Link to={"/discs/collection_item?mode=" + mode}>Collection items ({this.getCollectionItemDiscCount()})</Link></li>
+						<li key="sold-discs"><Link to={"/discs/sold?mode=" + mode}>Sold ({this.getSoldDiscCount()})</Link></li>
+
 					{this.getDiscTypes().map((disc, i) => {
 						return (
 							<li key={i}><Link to={'/discs/' + disc.type + '?mode=' + mode}>{disc.type} ({this.getDiscTypeCount(disc.type)})</Link></li>
@@ -68,6 +71,18 @@ export default class Stats extends Component {
 		const { discs } = this.props;
 
 		return discs.filter(disc => disc.missing != true).count();
+	}
+
+	getCollectionItemDiscCount() {
+		const { discs } = this.props;
+
+		return discs.filter(disc => disc.collection_item === true).count();
+	}
+
+	getSoldDiscCount() {
+		const { discs } = this.props;
+
+		return discs.filter(disc => disc.sold == true).count();
 	}
 
 	getLostDiscCount() {
