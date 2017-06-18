@@ -5,10 +5,8 @@ import path from 'path';
 const ENV = process.env.NODE_ENV;
 
 export function createServer(config, webpackConfig, callback) {
-
     const compiler = webpack(webpackConfig);
     const { port } = config;
-
     const app = express();
 
     let devMiddleware;
@@ -22,7 +20,6 @@ export function createServer(config, webpackConfig, callback) {
 
         app.use(devMiddleware);
         app.use(require('webpack-hot-middleware')(compiler));
-
     }
 
     callback(app);
@@ -35,10 +32,7 @@ export function createServer(config, webpackConfig, callback) {
             );
             res.end(index);
         });
-
     }
-
-
     app.listen(port, 'localhost', function(err) {
       if (err) {
         console.log(err);
@@ -49,4 +43,3 @@ export function createServer(config, webpackConfig, callback) {
 
     return app;
 }
-

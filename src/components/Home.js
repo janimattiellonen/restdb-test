@@ -36,7 +36,7 @@ export default class Home extends Component {
 
 			</div>
 		);
-	}	
+	}
 	getType(type) {
 		return type ? type : 'all';
 	}
@@ -54,7 +54,7 @@ export default class Home extends Component {
 	}
 
 	renderTableView() {
-		const { discs } = this.state;		
+		const { discs } = this.state;
 		return (
 			<TableView discs={discs} location={this.props.location} />
 		)
@@ -75,11 +75,19 @@ export default class Home extends Component {
 		if (type == 'lost') {
 			return discs.filter(disc => disc.missing == true);
 		}
-		
+
 		if (type == 'available') {
 			return discs.filter(disc => disc.missing != true);
 		}
-		
+
+		if (type == 'collection_item') {
+			return discs.filter(disc => disc.collection_item === true);
+		}
+
+		if (type == 'sold') {
+			return discs.filter(disc => disc.sold == true);
+		}
+
 		return discs.filter(disc => disc.type == type);
 	}
 
