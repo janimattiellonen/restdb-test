@@ -21,8 +21,8 @@ My discs
 
 ## PM2 settings
 
-`start src/server.js --interpreter ./node_modules/.bin/babel-node --log discs.janimattiellonen.fi.log --name "discs"`
-`restart src/server.js --interpreter ./node_modules/.bin/babel-node --log discs.janimattiellonen.fi.log --name "discs"`
+`pm2 start src/server.js --interpreter ./node_modules/.bin/babel-node --log discs.janimattiellonen.fi.log --name "discs"`
+`pm2 restart src/server.js --interpreter ./node_modules/.bin/babel-node --log discs.janimattiellonen.fi.log --name "discs"`
 
 ## Nginx
 
